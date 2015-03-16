@@ -23,6 +23,7 @@
 #import "webapp_index_core.h"
 #import "webapp_navbar.h"
 #import "webapp_jquery.h"
+#import "webapp_jquery.jeditable.h"
 #import "webapp_style.h"
 
 @implementation iOSHierarchyViewer
@@ -60,6 +61,7 @@ static HVCoreDataHandler *coreDataHandler = nil;
   [server registerHandler:[HVBase64StaticFile handler:WEBAPP_INDEX_UI] forUrls:[NSArray arrayWithObjects:@"", @"/", @"/index", @"/index.html", nil]];
   [server registerHandler:[HVBase64StaticFile handler:WEBAPP_INDEX_CORE] forUrl:@"/core.html"];
   [server registerHandler:[HVBase64StaticFile handler:WEBAPP_JQUERY] forUrl:@"/jquery.js"];
+  [server registerHandler:[HVBase64StaticFile handler:WEBAPP_JQUERY_JEDITABLE] forUrl:@"/jquery.jeditable.js"];
   [server registerHandler:[HVBase64StaticFile handler:WEBAPP_NAVBAR] forUrl:@"/navbar.js"];
   [server registerHandler:[HVBase64StaticFile handler:WEBAPP_STYLE] forUrl:@"/style.css"];
   [server registerHandler:[HVPreviewHandler handler] forUrl:@"/preview"];

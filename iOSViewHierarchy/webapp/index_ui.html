@@ -5,7 +5,23 @@
   <title>iOS Hierarchy Viewer</title>
   <link href="style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="jquery.jeditable.js"></script>
   <script type="text/javascript" src="navbar.js"></script>
+  <script>
+      $(document).ready(function() {
+                        //  $('.edit').editable('http://www.example.com/save.php');
+                        $('.edit').editable(function(value, settings) {
+                                            console.log(this);
+                                            console.log('value' + value);
+                                            console.log(settings);
+                                            this.innerText = '';
+                                            return(value);
+                                            }, {
+                                            type    : 'textarea',
+                                            submit  : 'OK',
+                                            });
+                        });
+  </script>
 </head>
 <body></body>
 <script>
@@ -148,6 +164,7 @@
 	}
 </script>
 <script>
+
 	function ViewsTree(options) {
 		var o = options;
 		var nodesParent = $('<div class="tree_parent"></div>');
@@ -229,7 +246,7 @@
 		var buildPropRow = function(viewId, prop, editableArray) {
 			var rowParent = $('<div class="editor_row_parent"></div>');
 			var name = $('<div class="editor_row_name selectable_text">' + prop.name + '</div>');
-			var value = $('<div type="text" class="editor_row_value selectable_text"></div>');
+			var value = $('<div type="text" class="edit"></div>');
             //value.attr('value', (prop.value ? prop.value : ''));
             value.text((prop.value ? prop.value : ''));
 			value.attr('data_type', prop.type);
@@ -237,6 +254,7 @@
 			value.attr('data_name', prop.name);
 			if ( $.inArray(prop.type, editableArray) >= 0 ) {
 				value.addClass('editor_row_value_editable');
+                //value[0].innerHTML = '<p class="edit" id="abc"> ' + value[0].innerHTML + '</p>'
 			} else {
 				value.attr('disabled', 'disabled');
 			}
@@ -257,6 +275,7 @@
 
 		var showPropsFunc = function(viewId, props, editableArray) {
 			dom.empty();
+            //dom.append( $('<p class="edit" id="div_paul">Dolor</p>'));
 			for (var i = 0 ; i < props.length ; ++i ) {
 				var prop = props[i];
 				dom.append(buildPropHeader(prop.name));
@@ -292,6 +311,18 @@
 		var hideFunc = function() { dom.hide(); }
 
 		o.parentDom.append(dom);
+        
+        console.log('initializing');
+        $('.edit').editable(function(value, settings) {
+                            console.log(this);
+                            console.log('value' + value);
+                            console.log(settings);
+                            this.innerText = '';
+                            return(value);
+                            }, {
+                            type    : 'textarea',
+                            submit  : 'OK',
+                            });
 
 		return {
 			showProps: showPropsFunc,

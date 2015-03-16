@@ -386,11 +386,12 @@ table, tr, td, tbody {
 }
 
 .editor_row_value_editable {
-    color: yellow;
+    color: pink;
 }
 
 .editor_row_value_editable:hover {
     background: #213140;
+    color: green;
 }
 
 .editor_row_type {
